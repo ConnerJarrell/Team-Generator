@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" type="image/ico" href="../assets/images/favicon.ico">
+    <title>Dream Team</title>
+    <!--Semantic-UI CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/c502137733.js"></script>
+    <!--My CSS-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<!--MAIN CONTAINER-->
+<div class="ui padded centered grid container" id="content-wrapper">
+    <!--HEADER-->
+    <div class="row">
+        <div class="column">
+            <div class="ui message">
+                <h1 class="ui header"><span style="color: black;"><i class="far fa-building"></i></span> Our Team</h1>
+            </div>
+        </div>
+    </div>
+    <!--END HEADER-->
+    <!--TEAM CARDS CONTAINER-->
+    <div class="ui three stackable cards" id="team-card-container">
+        {{ team }}
+    </div>
+</div>
+</body>
+
+</html>
