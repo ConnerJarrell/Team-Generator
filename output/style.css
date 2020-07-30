@@ -1,0 +1,21 @@
+body {
+    min-width: 100%;
+}
+
+#content-wrapper {
+    align-content: center;
+    min-width:100%;
+}
+
+#team-card-container {
+    align-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+@media all and (max-width: 560px) {
+    #team-card-container {
+        text-align: center;
+        width: 100%!important;
+    }
+}
