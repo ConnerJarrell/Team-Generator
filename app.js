@@ -10,17 +10,15 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-//Array to store employees as they are created
 const employees = [];
 
-// INQUIRER: Hierarchical inquirer prompt functions
-//Welcome message and prompt initiation
+
 function main() {
     console.log('Welcome to your Employee Summary Generator.');
     selectEmployee();
 };
 
-//First ask the user which type of employee they will be creating
+
 const employeePrompt = {
     type: 'rawlist',
     name: 'newEmployee',
@@ -28,8 +26,7 @@ const employeePrompt = {
     choices: ['Manager', 'Engineer', 'Intern'],
 };
 
-//Based on the user's answer to the employeePrompt, ask the set of questions associated
-//with the type of employee they will be adding
+
 function selectEmployee() {
     inquirer.prompt(employeePrompt).then((answers) => {
         if (answers.newEmployee === 'Manager') {
@@ -45,7 +42,7 @@ function selectEmployee() {
     });
 };
 
-//Array containing questions common to all employees
+
 const commonInputs = ([
     {
         type: 'input',
@@ -86,7 +83,7 @@ const commonInputs = ([
     }
 ]);
 
-//When Manager is selected from the employeePrompt, the user is presented with these questions.
+
 const managerQuestions = () => {
     const managerSpecificPrompt = {
         type: 'input',
@@ -96,16 +93,16 @@ const managerQuestions = () => {
     const managerPrompts = commonInputs.concat(managerSpecificPrompt);
     return managerPrompts;
 };
-//Generate a new Manager instance based on user input and push to employee array
+
 function newManager() {
     inquirer.prompt(managerQuestions()).then((answers) => {
         const newManager = new Manager(answers.newName, answers.newID, answers.newEmail, answers.newManagerOfficeNumber);
         employees.push(newManager);
         return newManager;
-    }).then(addMorePrompt);//ask user if they would like to add another employee
+    }).then(addMorePrompt);
 };
 
-//When Engineer is selected from the employeePrompt, the user is presented with these questions.
+
 const engineerQuestions = () => {
     const engineerSpecificPrompt = {
         type: 'input',
@@ -115,16 +112,16 @@ const engineerQuestions = () => {
     const engineerPrompts = commonInputs.concat(engineerSpecificPrompt);
     return engineerPrompts;
 };
-//Generate a new Engineer instance based on user input and push to employee array
+
 function newEngineer() {
     inquirer.prompt(engineerQuestions()).then((answers) => {
         const newEngineer = new Engineer(answers.newName, answers.newID, answers.newEmail, answers.newEngineerGitHub);
         employees.push(newEngineer);
-        //return newEngineer;
-    }).then(addMorePrompt); //ask user if they would like to add another employee
+        
+    }).then(addMorePrompt); 
 };
 
-//When Intern is selected from the employeePrompt, the user is presented with these questions.
+
 const internQuestions = () => {
     const internSpecificPrompt = {
         type: 'input',
@@ -134,16 +131,16 @@ const internQuestions = () => {
     const internPrompts = commonInputs.concat(internSpecificPrompt);
     return internPrompts;
 };
-//Generate a new Intern instance based on user input and push to employee array
+
 function newIntern() {
     inquirer.prompt(internQuestions()).then((answers) => {
         const newIntern = new Intern(answers.newName, answers.newID, answers.newEmail, answers.newInternSchool);
         employees.push(newIntern);
-        //return newIntern;
-    }).then(addMorePrompt); //ask user if they would like to add another employee
+        
+    }).then(addMorePrompt); 
 };
 
-//Asks the user if they want to add another employee after each entry
+
 function addMorePrompt() {
     inquirer.prompt({
         type: 'confirm',
@@ -154,16 +151,14 @@ function addMorePrompt() {
             selectEmployee();
         } else {
             console.log('Success');
-            //When the user has finished entering all team members, call a function to render
-            //the HTML and generate the team page
+            
             outputTeamHTML(employees);
 
         };
     });
 };
-//end inquirer prompt functions
 
-// Generate and write the rendered HTML to a file named `team.html` in the `output` folder.
+
 const outputTeamHTML = async (employees) => {
     try {
         const employeeHTML = await render(employees);
@@ -171,7 +166,7 @@ const outputTeamHTML = async (employees) => {
             if (err) {
                 throw err;
             } else {
-                console.log('Success! Your team page has been generated.');
+                console.log('Your team page has been generated.');
             }
         }
         )
